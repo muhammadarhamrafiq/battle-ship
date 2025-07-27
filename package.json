@@ -1,5 +1,5 @@
 {
-  "name": "odin-resturant-site",
+  "name": "webpack-template",
   "version": "1.0.0",
   "main": "webpack.config.js",
   "scripts": {
