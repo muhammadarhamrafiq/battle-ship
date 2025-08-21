@@ -1,5 +1,5 @@
 import Ship from "../src/logic/Ship.js";
-import { SHIPTYPES } from "../src/logic/constants.js";
+import { SHIPTYPES } from "../src/constants.js";
 
 describe("Ship Class", ()=>{
     it("Ship class should be defined" , ()=>{

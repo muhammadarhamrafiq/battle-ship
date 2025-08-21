@@ -1,5 +1,5 @@
 import GameBoard from "../src/logic/GameBoard.js";
-import { SHIPTYPES, SHIPSALIGNMENTS } from "../src/logic/constants.js"
+import { SHIPTYPES, SHIPSALIGNMENTS } from "../src/constants.js"
 
 describe("GameBoard Class", ()=>{
     let gameboard

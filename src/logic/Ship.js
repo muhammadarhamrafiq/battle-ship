@@ -1,4 +1,4 @@
-import { SHIPLENGTHS } from "./constants.js";
+import { SHIPLENGTHS } from "../constants.js";
 
 
 class Ship{

@@ -1,5 +1,5 @@
 import Ship from "./Ship.js";
-import { SHIPLENGTHS, SHIPSALIGNMENTS,  } from "./constants.js"
+import { SHIPLENGTHS, SHIPSALIGNMENTS } from "../constants.js"
 
 
 class GameBoard{
@@ -104,6 +104,10 @@ class GameBoard{
 
     #isShipDuplicate(type){
         return this.#ships.some(ship => ship.type === type);
+    }
+
+    get hits(){
+        return this.#hits
     }
 }
 
