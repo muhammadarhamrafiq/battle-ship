@@ -31,7 +31,7 @@ describe("Player", ()=>{
         expect(attack1).toBe(1);
         expect(attack2).toBe(0);
         expect(attack3).toBe(1);
-        expect(attack4).toBe();
+        expect(attack4).toBe(-1);
     })
 
 })

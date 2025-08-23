@@ -33,9 +33,10 @@ class AIPlayer extends Player {
     }
 
     #placeShips(){
+        const alignments = Object.values(SHIPSALIGNMENTS);
         for(const shiptype of Object.values(SHIPTYPES)){
             while(true){
-                const alignment = SHIPSALIGNMENTS[Math.floor(Math.random() * SHIPSALIGNMENTS.length)];
+                const alignment = alignments[Math.floor(Math.random() * alignments.length)];
                 const start = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
 
                 if(this.placeShip(shiptype, alignment, start)) break;
@@ -43,3 +44,5 @@ class AIPlayer extends Player {
         }
     }
 }
+
+export default AIPlayer;

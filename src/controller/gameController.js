@@ -31,7 +31,7 @@ class GameController{
         }
 
         // If the game is over
-        if(defender.hasAllShips()) {
+        if(defender.getGameboard().isLost()) {
             document.dispatchEvent(new CustomEvent("gameOver", { detail: { 
                 winner: attacker
             }}));
@@ -40,7 +40,7 @@ class GameController{
 
         // If it's the AI's turn
         if(defender instanceof AIPlayer) {
-            defender.makeMove();
+            defender.attack();
         }
     }
 
