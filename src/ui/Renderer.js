@@ -1,5 +1,7 @@
+import EventController from "./EventController";
+
 class Renderer {
-  renderEmptyGrid(gridContainer) {
+  static renderEmptyGrid(gridContainer) {
     for (let i = 0; i < 100; i++) {
       const row = Math.floor(i / 10);
       const column = i % 10;
@@ -13,6 +15,7 @@ class Renderer {
       cell.setAttribute("data-column", column);
       gridContainer.appendChild(cell);
     }
+
   }
 }
 

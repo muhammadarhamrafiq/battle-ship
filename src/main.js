@@ -1,4 +1,4 @@
 import './styles/style.css';
-import UIManager from "./ui/UIManager"
+import Controller from "./Controller"
 
-const ui = new UIManager();
+const controller = new Controller();

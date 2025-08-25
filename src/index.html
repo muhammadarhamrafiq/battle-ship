@@ -27,34 +27,34 @@
             </div>
 
             <!-- Ships container (horizontal list) -->
-            <div class="flex-1 flex items-center gap-4 overflow-x-auto py-1">
+            <div id="ships-container" class="flex-1 flex items-center gap-4 overflow-x-auto py-1">
                 <!-- Ship card template -->
-                <div
-                    class="flex-shrink-0 w-[220px] h-56 bg-white/3 rounded-lg p-3 flex items-center justify-center cursor-grab hover:scale-105 transition-transform duration-200 border border-white/5">
+                <div class="flex-shrink-0 w-[220px] h-56 bg-white/3 rounded-lg p-3 flex items-center justify-center cursor-grab hover:scale-105 transition-transform duration-200 border border-white/5"
+                    data-ship="Carrier">
                     <img src="resources/Carrier.png" alt="Carrier Ship"
                         class="ship-image max-w-[200px] max-h-[40px] object-contain transition-transform duration-200" />
                 </div>
 
-                <div
-                    class="flex-shrink-0 w-[220px] h-56 bg-white/3 rounded-lg p-3 flex items-center justify-center cursor-grab hover:scale-105 transition-transform duration-200 border border-white/5">
+                <div class="flex-shrink-0 w-[220px] h-56 bg-white/3 rounded-lg p-3 flex items-center justify-center cursor-grab hover:scale-105 transition-transform duration-200 border border-white/5"
+                    data-ship="Battleship">
                     <img src="resources/Battleship.png" alt="Battleship"
                         class="ship-image max-w-[200px] max-h-[40px] object-contain transition-transform duration-200" />
                 </div>
 
-                <div
-                    class="flex-shrink-0 w-[220px] h-56 bg-white/3 rounded-lg p-3 flex items-center justify-center cursor-grab hover:scale-105 transition-transform duration-200 border border-white/5">
+                <div class="flex-shrink-0 w-[220px] h-56 bg-white/3 rounded-lg p-3 flex items-center justify-center cursor-grab hover:scale-105 transition-transform duration-200 border border-white/5"
+                    data-ship="Submarine">
                     <img src="resources/Submarine.png" alt="Submarine"
                         class="ship-image max-w-[200px] max-h-[40px] object-contain transition-transform duration-200" />
                 </div>
 
-                <div
-                    class="flex-shrink-0 w-[220px] h-56 bg-white/3 rounded-lg p-3 flex items-center justify-center cursor-grab hover:scale-105 transition-transform duration-200 border border-white/5">
+                <div class="flex-shrink-0 w-[220px] h-56 bg-white/3 rounded-lg p-3 flex items-center justify-center cursor-grab hover:scale-105 transition-transform duration-200 border border-white/5"
+                    data-ship="Destroyer">
                     <img src="resources/Destroyer.png" alt="Destroyer"
                         class="ship-image max-w-[200px] max-h-[40px] object-contain transition-transform duration-200" />
                 </div>
 
-                <div
-                    class="flex-shrink-0 w-[220px] h-56 bg-white/3 rounded-lg p-3 flex items-center justify-center cursor-grab hover:scale-105 transition-transform duration-200 border border-white/5">
+                <div class="flex-shrink-0 w-[220px] h-56 bg-white/3 rounded-lg p-3 flex items-center justify-center cursor-grab hover:scale-105 transition-transform duration-200 border border-white/5"
+                    data-ship="Patrol">
                     <img src="resources/Patrol.png" alt="Patrol Boat"
                         class="ship-image max-w-[200px] max-h-[40px] object-contain transition-transform duration-200" />
                 </div>
@@ -89,6 +89,9 @@
         <section id="oppboard" class="grid grid-cols-10 grid-rows-10 w-full h-full p-6">
             <!-- Cells would be added via JS -->
         </section>
+    </div>
+
+    <div id="drag-guide" class="absolute inset-0 pointer-events-none z-99">
     </div>
 </body>
 
