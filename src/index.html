@@ -1,14 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <h1 class="text-5xl font-bold text-center text-white my-8">
         Battleships Game
     </h1>
+
+    <!-- Place Ships -->
+    <section class="flex items-center justify-between px-48 my-10">
+        <section id="shipsToPlace"
+            class="max-w-5xl bg-white/5 backdrop-blur-md border border-white/20 rounded-xl p-4 flex items-center gap-4 shadow-lg z-50">
+            <!-- Alignment -->
+            <div class="flex-none">
+                <label for="alignment" class="sr-only">Alignment</label>
+                <select id="alignment" name="alignment"
+                    class="bg-white/10 text-white text-sm px-3 py-2 rounded-md border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20">
+                    <option value="horizontal">Horizontal</option>
+                    <option value="vertical">Vertical</option>
+                </select>
+            </div>
+
+            <!-- Ships container (horizontal list) -->
+            <div class="flex-1 flex items-center gap-4 overflow-x-auto py-1">
+                <!-- Ship card template -->
+                <div
+                    class="flex-shrink-0 w-[220px] h-56 bg-white/3 rounded-lg p-3 flex items-center justify-center cursor-grab hover:scale-105 transition-transform duration-200 border border-white/5">
+                    <img src="resources/Carrier.png" alt="Carrier Ship"
+                        class="ship-image max-w-[200px] max-h-[40px] object-contain transition-transform duration-200" />
+                </div>
+
+                <div
+                    class="flex-shrink-0 w-[220px] h-56 bg-white/3 rounded-lg p-3 flex items-center justify-center cursor-grab hover:scale-105 transition-transform duration-200 border border-white/5">
+                    <img src="resources/Battleship.png" alt="Battleship"
+                        class="ship-image max-w-[200px] max-h-[40px] object-contain transition-transform duration-200" />
+                </div>
+
+                <div
+                    class="flex-shrink-0 w-[220px] h-56 bg-white/3 rounded-lg p-3 flex items-center justify-center cursor-grab hover:scale-105 transition-transform duration-200 border border-white/5">
+                    <img src="resources/Submarine.png" alt="Submarine"
+                        class="ship-image max-w-[200px] max-h-[40px] object-contain transition-transform duration-200" />
+                </div>
+
+                <div
+                    class="flex-shrink-0 w-[220px] h-56 bg-white/3 rounded-lg p-3 flex items-center justify-center cursor-grab hover:scale-105 transition-transform duration-200 border border-white/5">
+                    <img src="resources/Destroyer.png" alt="Destroyer"
+                        class="ship-image max-w-[200px] max-h-[40px] object-contain transition-transform duration-200" />
+                </div>
+
+                <div
+                    class="flex-shrink-0 w-[220px] h-56 bg-white/3 rounded-lg p-3 flex items-center justify-center cursor-grab hover:scale-105 transition-transform duration-200 border border-white/5">
+                    <img src="resources/Patrol.png" alt="Patrol Boat"
+                        class="ship-image max-w-[200px] max-h-[40px] object-contain transition-transform duration-200" />
+                </div>
+            </div>
+        </section>
+
+        <div class="mt-4 flex items-center justify-end gap-3">
+            <button id="randomPlaceBtn" type="button"
+                class="bg-white/10 text-white text-sm px-4 py-2 rounded-md border border-white/10 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/20"
+                title="Place all ships randomly on the board">
+                Place Ships Randomly
+            </button>
+
+            <button id="startGameBtn" type="button"
+                class="bg-emerald-600 text-white text-sm px-4 py-2 rounded-md border border-emerald-700 hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                title="Start the game">
+                Start Game
+            </button>
+
+            <button id="clearBoardBtn" type="button"
+                class="bg-red-600 text-white text-sm px-4 py-2 rounded-md border border-red-700 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-400"
+                title="Clear all ships from the board">
+                Clear Board
+            </button>
+        </div>
+    </section>
 
     <div class="w-4/5 h-[40vw] m-auto flex items-center justify-cent bg-white/80 rounded-md">
         <section id="ownboard" class="grid grid-cols-10 grid-rows-10 w-full h-full p-6">
@@ -19,4 +91,5 @@
         </section>
     </div>
 </body>
+
 </html>
