@@ -25,13 +25,14 @@ class EventController{
         })
     }
 
-    static addPlacementMethod(container){
+    static addPlacementMethod(container, placeShip){
         container.addEventListener("mouseup", (event)=>{
             const target = event.target.closest("[data-row][data-column]");
             if(!shipToPlace) return;
-            const row = target.getAttribute("data-row");
-            const column = target.getAttribute("data-column");
+            const row = parseInt(target.getAttribute("data-row"));
+            const column = parseInt(target.getAttribute("data-column"));
             EventController.clearPlacementPreview(container);
+            placeShip(shipToPlace, alignment, [column, row]);
         })
     }
 

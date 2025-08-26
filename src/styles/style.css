@@ -7,3 +7,19 @@ body {
 .placement-preview{
     @apply bg-blue-600;
 }
+
+[data-status="missed"] {
+    @apply bg-red-500;
+}
+
+[data-status="hitted"] {
+    @apply bg-yellow-500;
+}
+
+[data-status="occupied"] {
+    @apply bg-gray-500;
+}
+
+[data-status="sunk"] {
+    @apply bg-black;
+}

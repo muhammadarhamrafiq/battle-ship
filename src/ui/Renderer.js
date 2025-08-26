@@ -15,6 +15,55 @@ class Renderer {
       cell.setAttribute("data-column", column);
       gridContainer.appendChild(cell);
     }
+  }
+
+  static renderOwnBoard(gameboard, grid){
+    /**
+     * Render the ships on the board
+     * if the cell is in the ships not in hits mark it as occupied
+     * if the cell is in hits and ships mark is as hitted
+     * if the cell is among the hits not in ships mark it as missed
+     * if the cell is among the sank ships mark it as the sank ships
+     */
+    const hits = gameboard.hits;
+    const shipsLocations = gameboard.getAllShips().flatMap(ship => ship.occupies);
+    const missed = hits.filter(hit => shipsLocations.every(([x, y]) => hit[0] !== x || hit[1] !== y));
+    const hitted = hits.filter(hit => shipsLocations.some(([x, y]) => hit[0] === x && hit[1] === y));
+    const occupied = shipsLocations.filter(location => hits.every(([x, y]) => x !== location[0] || y !== location[1]));
+    const sunkShips = gameboard.getSunkShips().flatMap(ship => ship.occupies);
+
+
+    // Mark missed Cells
+    missed.forEach(([x, y]) => {
+      const cell = grid.querySelector(`[data-row="${y}"][data-column="${x}"]`);
+      if (cell) {
+        cell.setAttribute("data-status", "missed");
+      }
+    });
+
+    // Mark hitted Cells
+    hitted.forEach(([x, y]) => {
+      const cell = grid.querySelector(`[data-row="${y}"][data-column="${x}"]`);
+      if (cell) {
+        cell.setAttribute("data-status", "hitted");
+      }
+    });
+
+    // Mark occupied Cells
+    occupied.forEach(([x, y]) => {
+      const cell = grid.querySelector(`[data-row="${y}"][data-column="${x}"]`);
+      if (cell) {
+        cell.setAttribute("data-status", "occupied");
+      }
+    });
+
+    // Mark sunk Ships
+    sunkShips.forEach(([x, y]) => {
+      const cell = grid.querySelector(`[data-row="${y}"][data-column="${x}"]`);
+      if (cell) {
+        cell.setAttribute("data-status", "sunk");
+      }
+    });
 
   }
 }
