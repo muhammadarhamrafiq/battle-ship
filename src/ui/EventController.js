@@ -25,7 +25,7 @@ class EventController{
         })
     }
 
-    static addPlacementMethod(container, placeShip){
+    static addPlacementMethod(container, placeShip, shipsContainer){
         container.addEventListener("mouseup", (event)=>{
             const target = event.target.closest("[data-row][data-column]");
             if(!shipToPlace) return;
@@ -33,6 +33,8 @@ class EventController{
             const column = parseInt(target.getAttribute("data-column"));
             EventController.clearPlacementPreview(container);
             placeShip(shipToPlace, alignment, [column, row]);
+            const shipToRemove = shipsContainer.querySelector(`[data-ship="${shipToPlace}"]`);
+            shipToRemove.remove();
         })
     }
 
@@ -64,6 +66,27 @@ class EventController{
     static clearPlacementPreview(container){
         const previewCells = container.querySelectorAll(".placement-preview");
         previewCells.forEach(cell => cell.classList.remove("placement-preview"));
+    }
+
+    static addRandomPlacement(button, shipsContainer, placeShip){
+        button.addEventListener("click", () => {
+            shipsContainer.querySelectorAll("[data-ship]").forEach(ship => {
+                const shipName = ship.getAttribute("data-ship");
+                const alignment = Math.floor(Math.random() * 2) === 0 ? "horizontal" : "vertical";
+                let coords;
+                let placed = false;
+
+                while(!placed){
+                    coords = [
+                        Math.floor(Math.random() * 10),
+                        Math.floor(Math.random() * 10)
+                    ];
+                    placed = placeShip(shipName, alignment, coords);
+                }
+
+                ship.remove();
+            });
+        });
     }
 }
 

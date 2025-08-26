@@ -1,6 +1,5 @@
 import Player from "./Player.js";
 import { SHIPTYPES, SHIPSALIGNMENTS } from "../constants.js";
-import Ship from "./Ship.js";
 
 class AIPlayer extends Player {
     #attacked

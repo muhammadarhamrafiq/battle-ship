@@ -66,6 +66,10 @@ class Renderer {
     });
 
   }
+
+  static renderOppBoard(gameBoard, grid){
+    
+  }
 }
 
 
