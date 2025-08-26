@@ -6,10 +6,10 @@ class Renderer {
       const row = Math.floor(i / 10);
       const column = i % 10;
       const cell = document.createElement("div");
-      
+
       cell.className = "h-full w-full border-t border-l border-t-black/50 border-l-black/50";
-      if(row == 9) cell.classList.add("border-b", "border-b-black/50");
-      if(column == 9) cell.classList.add("border-r", "border-r-black/50");
+      if (row == 9) cell.classList.add("border-b", "border-b-black/50");
+      if (column == 9) cell.classList.add("border-r", "border-r-black/50");
 
       cell.setAttribute("data-row", row);
       cell.setAttribute("data-column", column);
@@ -17,7 +17,7 @@ class Renderer {
     }
   }
 
-  static renderOwnBoard(gameboard, grid){
+  static renderOwnBoard(gameboard, grid) {
     /**
      * Render the ships on the board
      * if the cell is in the ships not in hits mark it as occupied
@@ -32,6 +32,13 @@ class Renderer {
     const occupied = shipsLocations.filter(location => hits.every(([x, y]) => x !== location[0] || y !== location[1]));
     const sunkShips = gameboard.getSunkShips().flatMap(ship => ship.occupies);
 
+    // Mark occupied Cells
+    occupied.forEach(([x, y]) => {
+      const cell = grid.querySelector(`[data-row="${y}"][data-column="${x}"]`);
+      if (cell) {
+        cell.setAttribute("data-status", "occupied");
+      }
+    });
 
     // Mark missed Cells
     missed.forEach(([x, y]) => {
@@ -49,14 +56,6 @@ class Renderer {
       }
     });
 
-    // Mark occupied Cells
-    occupied.forEach(([x, y]) => {
-      const cell = grid.querySelector(`[data-row="${y}"][data-column="${x}"]`);
-      if (cell) {
-        cell.setAttribute("data-status", "occupied");
-      }
-    });
-
     // Mark sunk Ships
     sunkShips.forEach(([x, y]) => {
       const cell = grid.querySelector(`[data-row="${y}"][data-column="${x}"]`);
@@ -67,8 +66,8 @@ class Renderer {
 
   }
 
-  static renderOppBoard(gameBoard, grid){
-    
+  static renderOppBoard(gameBoard, grid) {
+
   }
 }
 

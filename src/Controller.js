@@ -29,6 +29,7 @@ class Controller{
         EventController.addPlacementMethod(this.DOM.get('ownboard'), this.placeShip, this.DOM.get('shipsToPlaceContainer'));
         EventController.addPlacementPreview(this.DOM.get('ownboard'));
         EventController.addRandomPlacement(this.DOM.get('randomPlaceBtn'), this.DOM.get('shipsToPlaceContainer'), this.placeShip);
+        EventController.addStart(this.DOM.get('startBtn'), this.startGame);
     }
 
     placeShip = (ship, alignment, coords)=>{
@@ -43,7 +44,28 @@ class Controller{
     }
 
     renderOppBoard = (gameBoard)=>{
-        Renderer.renderOppBoard(gameBoard, this.DOM.get('oppboard'));
+        Renderer.renderOwnBoard(gameBoard, this.DOM.get('oppboard'));
+    }
+
+    startGame = ()=>{
+        if(this.started) return;
+        this.started = true;
+
+        this.#gameController.startGame();
+        EventController.addAttackMethod(this.DOM.get('oppboard'), (coords)=>{
+            document.dispatchEvent(new CustomEvent("attack", {
+                detail: {
+                    attacker: this.#player,
+                    coords,
+                }
+            }))
+        });
+
+        // Listen for game over
+        document.addEventListener("gameOver", (event)=>{
+            const winner = event.detail.winner;
+            alert(`${winner} wins!`);
+        })
     }
 }
 

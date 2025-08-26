@@ -7,6 +7,8 @@ class DOMManager{
         this.shipsToPlaceContainer = document.getElementById("ships-container");
         this.dragGuide = document.getElementById("drag-guide");
         this.alignment = document.getElementById("alignment");
+        this.randomPlaceBtn = document.getElementById("randomPlaceBtn");
+        this.startBtn = document.getElementById("startBtn");
     }
 
     set(elem){

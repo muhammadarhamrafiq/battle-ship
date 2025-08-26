@@ -32,7 +32,8 @@ class EventController{
             const row = parseInt(target.getAttribute("data-row"));
             const column = parseInt(target.getAttribute("data-column"));
             EventController.clearPlacementPreview(container);
-            placeShip(shipToPlace, alignment, [column, row]);
+            let placed = placeShip(shipToPlace, alignment, [column, row]);
+            if(!placed) return;
             const shipToRemove = shipsContainer.querySelector(`[data-ship="${shipToPlace}"]`);
             shipToRemove.remove();
         })
@@ -87,6 +88,22 @@ class EventController{
                 ship.remove();
             });
         });
+    }
+
+    static addStart(button, startGame){
+        button.addEventListener("click", startGame);
+    }
+
+    static addAttackMethod(grid, attack){
+        grid.addEventListener("click", (event)=>{
+            debugger;
+            const target = event.target.closest("[data-row][data-column]");
+            if(!target) return;
+
+            const row = target.getAttribute("data-row");
+            const column = target.getAttribute("data-column");
+            attack([column, row]);
+        })
     }
 }
 

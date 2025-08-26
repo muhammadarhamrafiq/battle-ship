@@ -4,9 +4,11 @@ class GameController{
     #players;
     #turn;
 
-    constructor(player1, player2 = new AIPlayer()){
+    constructor(player1, player2 = new AIPlayer(), renderOwnBoard, renderOppBoard){
         this.#players = [player1, player2];
         this.#turn = 0;
+        this.renderOwnBoard = renderOwnBoard
+        this.renderOppBoard = renderOppBoard
     }
 
     startGame(){
@@ -46,11 +48,11 @@ class GameController{
 
     renderBoards(){
         if(this.#players[1] instanceof AIPlayer){
-            renderOwnView(this.#players[0].getGameboard());
-            renderOpponentView(this.#players[1].getGameboard());
+            this.renderOwnBoard(this.#players[0].getGameboard());
+            this.renderOppBoard(this.#players[1].getGameboard());
         }else{
-            renderOwnView(this.#players[this.#turn].getGameboard());
-            renderOpponentView(this.#players[(this.#turn + 1) % 2].getGameboard());
+            this.renderOwnBoard(this.#players[this.#turn].getGameboard());
+            this.renderOppBoard(this.#players[(this.#turn + 1) % 2].getGameboard());
         }
     }
 
