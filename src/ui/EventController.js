@@ -96,12 +96,11 @@ class EventController{
 
     static addAttackMethod(grid, attack){
         grid.addEventListener("click", (event)=>{
-            debugger;
             const target = event.target.closest("[data-row][data-column]");
             if(!target) return;
 
-            const row = target.getAttribute("data-row");
-            const column = target.getAttribute("data-column");
+            const row = parseInt(target.getAttribute("data-row"));
+            const column = parseInt(target.getAttribute("data-column"));
             attack([column, row]);
         })
     }

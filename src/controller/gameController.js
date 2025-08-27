@@ -4,7 +4,7 @@ class GameController{
     #players;
     #turn;
 
-    constructor(player1, player2 = new AIPlayer(), renderOwnBoard, renderOppBoard){
+    constructor(player1, player2, renderOwnBoard, renderOppBoard){
         this.#players = [player1, player2];
         this.#turn = 0;
         this.renderOwnBoard = renderOwnBoard
@@ -23,6 +23,7 @@ class GameController{
         if(attacker !== this.#players[this.#turn]) return;
         const defender = this.#players[(this.#turn + 1)%2];
 
+        debugger;
         const res = defender.receiveAttack(coords);
         if(res === -1) return // if attack on already hitted spot
 
@@ -41,8 +42,8 @@ class GameController{
         }
 
         // If it's the AI's turn
-        if(defender instanceof AIPlayer) {
-            defender.attack();
+        if(this.#players[this.#turn] instanceof AIPlayer) {
+            this.#players[this.#turn].attack();
         }
     }
 
