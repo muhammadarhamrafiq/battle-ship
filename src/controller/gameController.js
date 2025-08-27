@@ -47,7 +47,9 @@ class GameController {
 
         // If it's the AI's turn
         if (this.#players[this.#turn] instanceof AIPlayer) {
-            this.#players[this.#turn].attack();
+            setTimeout(()=>{
+                this.#players[this.#turn].attack();
+            }, 1000)
         }
     }
 
