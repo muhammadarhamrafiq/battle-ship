@@ -21,14 +21,14 @@ class Controller{
     init(){
         Renderer.renderEmptyGrid(this.DOM.get('ownboard'));
         Renderer.renderEmptyGrid(this.DOM.get('oppboard'));
-        Renderer.renderOwnBoard(this.#AI.getGameboard(), this.DOM.get('oppboard'));
+        Renderer.renderOppBoard(this.#AI.getGameboard(), this.DOM.get('oppboard'));
 
-        EventController.addDragStart(this.DOM.get('shipsToPlaceContainer'), this.DOM.get("dragGuide"));
+        EventController.addDragStart(this.DOM.get('shipsContainer'), this.DOM.get("dragGuide"));
         EventController.addDragEnd(this.DOM.get('ownboard'), this.DOM.get("dragGuide"));
         EventController.addAlignmentChange(this.DOM.get("alignment"));
-        EventController.addPlacementMethod(this.DOM.get('ownboard'), this.placeShip, this.DOM.get('shipsToPlaceContainer'));
+        EventController.addPlacementMethod(this.DOM.get('ownboard'), this.placeShip, this.DOM.get('shipsContainer'));
         EventController.addPlacementPreview(this.DOM.get('ownboard'));
-        EventController.addRandomPlacement(this.DOM.get('randomPlaceBtn'), this.DOM.get('shipsToPlaceContainer'), this.placeShip);
+        EventController.addRandomPlacement(this.DOM.get('randomPlaceBtn'), this.DOM.get('shipsContainer'), this.placeShip);
         EventController.addStart(this.DOM.get('startBtn'), this.startGame);
     }
 
@@ -36,6 +36,11 @@ class Controller{
         const placed = this.#player.placeShip(ship, alignment, coords);
         if(!placed) return false;
         Renderer.renderOwnBoard(this.#player.getGameboard(), this.DOM.get('ownboard'));
+        if(this.#player.hasAllShips()){
+            this.DOM.get('startBtn').removeAttribute('disabled');
+            this.DOM.get('randomPlaceBtn').remove();
+            this.DOM.get('shipsToPlace').remove();
+        }
         return true;
     }
 
@@ -44,12 +49,13 @@ class Controller{
     }
 
     renderOppBoard = (gameBoard)=>{
-        Renderer.renderOwnBoard(gameBoard, this.DOM.get('oppboard'));
+        Renderer.renderOppBoard(gameBoard, this.DOM.get('oppboard'));
     }
 
     startGame = ()=>{
         if(this.started) return;
         this.started = true;
+        this.DOM.get('startBtn').setAttribute('disabled', 'true');
 
         this.#gameController.startGame();
         EventController.addAttackMethod(this.DOM.get('oppboard'), (coords)=>{
@@ -64,7 +70,9 @@ class Controller{
         // Listen for game over
         document.addEventListener("gameOver", (event)=>{
             const winner = event.detail.winner;
-            alert(`${winner} wins!`);
+            setTimeout(()=>{
+                Renderer.gameEnded(winner === this.#player, this.DOM.get('gameEndOverlay'));
+            }, 1000)
         })
     }
 }

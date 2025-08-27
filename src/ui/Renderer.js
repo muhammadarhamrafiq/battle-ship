@@ -67,7 +67,49 @@ class Renderer {
   }
 
   static renderOppBoard(gameBoard, grid) {
+    /**
+     * Same as the renderOwnBoard methods but skip render occupied cells
+    */
 
+    const hits = gameBoard.hits;
+    const shipsLocations = gameBoard.getAllShips().flatMap(ship => ship.occupies);
+    const missed = hits.filter(hit => shipsLocations.every(([x, y]) => hit[0] !== x || hit[1] !== y));
+    const hitted = hits.filter(hit => shipsLocations.some(([x, y]) => hit[0] === x && hit[1] === y));
+    const occupied = shipsLocations.filter(location => hits.every(([x, y]) => x !== location[0] || y !== location[1]));
+    const sunkShips = gameBoard.getSunkShips().flatMap(ship => ship.occupies);
+
+    // Mark missed Cells
+    missed.forEach(([x, y]) => {
+      const cell = grid.querySelector(`[data-row="${y}"][data-column="${x}"]`);
+      if (cell) {
+        cell.setAttribute("data-status", "missed");
+      }
+    });
+
+    // Mark hitted Cells
+    hitted.forEach(([x, y]) => {
+      const cell = grid.querySelector(`[data-row="${y}"][data-column="${x}"]`);
+      if (cell) {
+        cell.setAttribute("data-status", "hitted");
+      }
+    });
+
+    // Mark sunk Ships
+    sunkShips.forEach(([x, y]) => {
+      const cell = grid.querySelector(`[data-row="${y}"][data-column="${x}"]`);
+      if (cell) {
+        cell.setAttribute("data-status", "sunk");
+      }
+    });
+  }
+
+  static gameEnded(isPlayerWinner, gameEndOverlay){
+    const message = isPlayerWinner ? "You win!" : "You lose!";
+    gameEndOverlay.querySelector("p").textContent = message;
+    gameEndOverlay.setAttribute("data-open", "true");
+    gameEndOverlay.querySelector("button").onclick = ()=>{
+      location.reload();
+    }
   }
 }
 

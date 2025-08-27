@@ -15,7 +15,7 @@
     <!-- Place Ships -->
     <section class="flex items-center justify-between px-48 my-10">
         <section id="shipsToPlace"
-            class="max-w-5xl bg-white/5 backdrop-blur-md border border-white/20 rounded-xl p-4 flex items-center gap-4 shadow-lg z-50">
+            class="max-w-5xl bg-white/5 backdrop-blur-md border border-white/20 rounded-xl p-4 flex items-center gap-4 shadow-lg">
             <!-- Alignment -->
             <div class="flex-none">
                 <label for="alignment" class="sr-only">Alignment</label>
@@ -69,8 +69,8 @@
             </button>
 
             <button id="startBtn" type="button"
-                class="bg-emerald-600 text-white text-sm px-4 py-2 rounded-md border border-emerald-700 hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-400"
-                title="Start the game">
+                class="bg-emerald-600 text-white text-sm px-4 py-2 rounded-md border border-emerald-700 hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-400 disabled:opacity-70 disabled:pointer-events-none"
+                title="Start the game" disabled>
                 Start Game
             </button>
         </div>
@@ -85,7 +85,17 @@
         </section>
     </div>
 
+    <!-- Drag Guide -->
     <div id="drag-guide" class="absolute inset-0 pointer-events-none z-99">
+    </div>
+
+    <!-- Game Ended Overlay -->
+    <div id="gameEndOverlay" class="fixed bg-black w-full h-full top-0 left-0 opacity-0 pointer-events-none transition-opacity duration-300 data-[open=true]:opacity-100 data-[open=true]:pointer-events-auto" data-open="false">
+        <div class="flex flex-col justify-center items-center h-full">
+            <h2 class="text-white text-2xl font-bold">Game Over</h2>
+            <p class="text-white"></p>
+            <button class="mt-4 bg-white text-black px-4 py-2 rounded">Play Again</button>
+        </div>
     </div>
 </body>
 
