@@ -23,3 +23,86 @@ body {
 [data-status="sunk"] {
     @apply bg-black;
 }
+
+/* Touch-friendly enhancements */
+.touch-enabled [data-ship] {
+    /* Ensure touch targets are at least 44x44px */
+    min-width: 44px;
+    min-height: 44px;
+}
+
+/* Enhanced drag guide for touch */
+#drag-guide.touch-dragging {
+    opacity: 0.8;
+    transform: scale(1.1);
+    transition: transform 0.1s ease-out;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* Improve touch feedback */
+.touch-enabled [data-ship]:active,
+.touch-enabled [data-row][data-column]:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease-out;
+}
+
+/* Prevent text selection during drag */
+.touch-enabled {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+}
+
+/* Safari-specific fixes */
+@supports (-webkit-touch-callout: none) {
+    /* iOS Safari */
+    [data-ship], [data-row][data-column] {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-touch-callout: none;
+    }
+}
+
+/* Firefox-specific fixes */
+@-moz-document url-prefix() {
+    [data-ship] {
+        cursor: -moz-grab;
+    }
+    [data-ship]:active {
+        cursor: -moz-grabbing;
+    }
+}
+
+/* Edge/Chrome pointer events */
+@supports (pointer-events: auto) {
+    #drag-guide {
+        pointer-events: none;
+    }
+}
+
+/* Responsive grid cells for mobile */
+@media (max-width: 768px) {
+    [data-row][data-column] {
+        min-width: 32px;
+        min-height: 32px;
+    }
+    
+    .touch-enabled [data-ship] {
+        min-width: 40px;
+        min-height: 40px;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    [data-status="missed"] {
+        border: 2px solid currentColor;
+    }
+    
+    [data-status="hitted"] {
+        border: 2px solid currentColor;
+    }
+}
+
