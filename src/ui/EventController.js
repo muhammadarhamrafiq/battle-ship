@@ -87,18 +87,19 @@ class EventController{
     }
 
     static addPlacementMethod(container, placeShip, shipsContainer){
-        // Universal placement handler
-        const handlePlacement = (event) => {
-            // For touch events, we need to find the element under the touch point
-            let target;
+        // Helper function to get target element from any event type
+        const getTargetCell = (event) => {
             if (event.type.startsWith('touch')) {
                 const coords = EventNormalizer.getCoordinates(event);
                 const elementUnderTouch = EventNormalizer.getElementFromPoint(coords.x, coords.y);
-                target = elementUnderTouch?.closest("[data-row][data-column]");
-            } else {
-                target = event.target.closest("[data-row][data-column]");
+                return elementUnderTouch?.closest("[data-row][data-column]");
             }
-            
+            return event.target.closest("[data-row][data-column]");
+        };
+
+        // Universal placement handler
+        const handlePlacement = (event) => {
+            const target = getTargetCell(event);
             if(!shipToPlace || !target) return;
             
             const row = parseInt(target.getAttribute("data-row"));
@@ -133,18 +134,19 @@ class EventController{
     }
 
     static addPlacementPreview(container){
-        // Universal preview handler
-        const handlePreview = (event) => {
-            // Find target cell - handle touch events specially
-            let target;
+        // Helper function to get target element from any event type
+        const getTargetCell = (event) => {
             if (event.type.startsWith('touch')) {
                 const coords = EventNormalizer.getCoordinates(event);
                 const elementUnderTouch = EventNormalizer.getElementFromPoint(coords.x, coords.y);
-                target = elementUnderTouch?.closest("[data-row][data-column]");
-            } else {
-                target = event.target.closest("[data-row][data-column]");
+                return elementUnderTouch?.closest("[data-row][data-column]");
             }
-            
+            return event.target.closest("[data-row][data-column]");
+        };
+
+        // Universal preview handler
+        const handlePreview = (event) => {
+            const target = getTargetCell(event);
             if(!shipToPlace || !target) return;
             
             const row = target.getAttribute("data-row");
@@ -204,18 +206,19 @@ class EventController{
     }
 
     static addAttackMethod(grid, attack){
-        // Universal attack handler
-        const handleAttack = (event) => {
-            // For touch events, find element under touch point
-            let target;
+        // Helper function to get target element from any event type
+        const getTargetCell = (event) => {
             if (event.type.startsWith('touch')) {
                 const coords = EventNormalizer.getCoordinates(event);
                 const elementUnderTouch = EventNormalizer.getElementFromPoint(coords.x, coords.y);
-                target = elementUnderTouch?.closest("[data-row][data-column]");
-            } else {
-                target = event.target.closest("[data-row][data-column]");
+                return elementUnderTouch?.closest("[data-row][data-column]");
             }
-            
+            return event.target.closest("[data-row][data-column]");
+        };
+
+        // Universal attack handler
+        const handleAttack = (event) => {
+            const target = getTargetCell(event);
             if(!target) return;
 
             const row = parseInt(target.getAttribute("data-row"));
@@ -229,7 +232,7 @@ class EventController{
         // For touch devices, use touchend for better responsiveness
         if (BrowserFeatures.hasTouchSupport()) {
             grid.addEventListener("touchend", (event) => {
-                // Prevent click event from firing on touch devices
+                // Prevent click event from firing on touch devices to avoid double-tap
                 EventNormalizer.preventDefault(event);
                 handleAttack(event);
             });
